@@ -14,7 +14,7 @@ https://docs.djangoproject.com/en/1.8/ref/settings/
 import os
 
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
-MAIN_DIR = os.path.dirname(os.path.abspath(__file__))
+#MAIN_DIR = os.path.dirname(os.path.abspath(__file__))
 
 ON_HEROKU = os.environ.get('ON_HEROKU')
 
@@ -63,7 +63,7 @@ ROOT_URLCONF = 'coffeedapp.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(MAIN_DIR, 'templates')],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -91,28 +91,17 @@ WSGI_APPLICATION = 'coffeedapp.wsgi.application'
 # Parse database configuration from $DATABASE_URL
 
 if ON_HEROKU == True:
-
     # Parse database configuration from $DATABASE_URL
-
     import dj_database_url
-
     DATABASES['default'] = dj_database_url.config()
 
 else: 
-
     DATABASES = {
-
         'default': {
-
             'ENGINE': 'django.db.backends.sqlite3',
-
-            'NAME': os.path.join(MAIN_DIR, 'db.sqlite3'),
-
+            'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
         }
-
     }
-
-
 
 
 #import dj_database_url
@@ -145,12 +134,12 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 TEMPLATES_DIRS = (
-    os.path.join(MAIN_DIR, 'templates'),
+    os.path.join(BASE_DIR, 'templates'),
     )
 
 STATICFILES_DIRS = (
 
-os.path.join(MAIN_DIR, 'static'),
+os.path.join(BASE_DIR, 'static'),
 
 )
 
