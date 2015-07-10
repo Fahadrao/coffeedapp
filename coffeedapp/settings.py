@@ -1,3 +1,30 @@
+
+
+# Static files (CSS, JavaScript, Images)
+# https://docs.djangoproject.com/en/1.7/howto/static-files/
+
+STATIC_URL = '/static/'
+
+TEMPLATE_DIRS = (
+    os.path.join(MAIN_DIR, 'templates'),
+    )
+
+STATICFILES_DIRS = (
+    os.path.join(MAIN_DIR, 'static'),
+    )
+
+STATIC_ROOT = 'staticfiles'
+
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
+AWS_S3_FORCE_HTTP_URL = True
+AWS_QUERYSTRING_AUTH = False
+AWS_SECRET_ACCESS_KEY = os.environ.get('AWSSecretKey')
+AWS_ACCESS_KEY_ID = os.environ.get('AWSAccessKeyId')
+
+AWS_STORAGE_BUCKET_NAME = '1mopycoffeed'
+
+
+
 """
 Django settings for coffeedapp project.
 
@@ -90,7 +117,7 @@ WSGI_APPLICATION = 'coffeedapp.wsgi.application'
 #}
 # Parse database configuration from $DATABASE_URL
 
-if ON_HEROKU == True:
+if ON_HEROKU == 1:
     # Parse database configuration from $DATABASE_URL
     import dj_database_url
     DATABASES['default'] = dj_database_url.config()
