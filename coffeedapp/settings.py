@@ -1,30 +1,3 @@
-
-
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/1.7/howto/static-files/
-
-STATIC_URL = '/static/'
-
-TEMPLATE_DIRS = (
-    os.path.join(MAIN_DIR, 'templates'),
-    )
-
-STATICFILES_DIRS = (
-    os.path.join(MAIN_DIR, 'static'),
-    )
-
-STATIC_ROOT = 'staticfiles'
-
-DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
-AWS_S3_FORCE_HTTP_URL = True
-AWS_QUERYSTRING_AUTH = False
-AWS_SECRET_ACCESS_KEY = os.environ.get('AWSSecretKey')
-AWS_ACCESS_KEY_ID = os.environ.get('AWSAccessKeyId')
-
-AWS_STORAGE_BUCKET_NAME = '1mopycoffeed'
-
-
-
 """
 Django settings for coffeedapp project.
 
@@ -40,8 +13,8 @@ https://docs.djangoproject.com/en/1.8/ref/settings/
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
 
-BASE_DIR = os.path.dirname(os.path.dirname(__file__))
-#MAIN_DIR = os.path.dirname(os.path.abspath(__file__))
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))
+MAIN_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 ON_HEROKU = os.environ.get('ON_HEROKU')
 
@@ -71,7 +44,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
- #   'core',
+    'core',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -90,7 +63,7 @@ ROOT_URLCONF = 'coffeedapp.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates')],
+        'DIRS': [os.path.join(MAIN_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -117,18 +90,29 @@ WSGI_APPLICATION = 'coffeedapp.wsgi.application'
 #}
 # Parse database configuration from $DATABASE_URL
 
-if ON_HEROKU == 1:
+if ON_HEROKU == True:
+
     # Parse database configuration from $DATABASE_URL
+
     import dj_database_url
+
     DATABASES['default'] = dj_database_url.config()
 
 else: 
+
     DATABASES = {
+
         'default': {
+
             'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+
+            'NAME': os.path.join(MAIN_DIR, 'db.sqlite3'),
+
         }
+
     }
+
+
 
 
 #import dj_database_url
@@ -161,12 +145,12 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 TEMPLATES_DIRS = (
-    os.path.join(BASE_DIR, 'templates'),
+    os.path.join(MAIN_DIR, 'templates'),
     )
 
 STATICFILES_DIRS = (
 
-os.path.join(BASE_DIR, 'static'),
+os.path.join(MAIN_DIR, 'static'),
 
 )
 
