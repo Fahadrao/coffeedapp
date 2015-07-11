@@ -10,6 +10,8 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/1.8/ref/settings/
 """
 
+
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
 
@@ -87,12 +89,38 @@ WSGI_APPLICATION = 'coffeedapp.wsgi.application'
 #}
 # Parse database configuration from $DATABASE_URL
 
-if ON_HEROKU == 1:
+
+print "CHECKING_HEROKU!"
+ON_HEROKU = os.environ.get('ON_HEROKU') #<---- this captures the ON_HEROKU variable from the environment and assigns it to ON_HEROKU.
+
+
+if ON_HEROKU == '1':
+# Parse database configuration from $DATABASE_URL
+    import dj_database_url
+    print "ON_HEROKU!"
+    DATABASES = {
+    'default': dj_database_url.config(default=os.environ.get('DATABASE_URL'))
+    }
+else:
+    print "NOT_ON_HEROKU!"
+    DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
+        'NAME': os.path.join(MAIN_DIR, 'db.sqlite3'),
+        #'NAME': 'database.db',                      # Or path to database file if using sqlite3.
+        # The following settings are not used with sqlite3:
+        #'USER': '',
+        #'PASSWORD': '',
+        #'HOST': '',                      # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
+        #'PORT': '',                      # Set to empty string for default.
+    }
+}
+
+"""if ON_HEROKU == 1:
 
 	# Parse database configuration from $DATABASE_URL
 
 	import dj_database_url
-
 	DATABASES['default'] = dj_database_url.config()
 
 else: 
@@ -109,7 +137,7 @@ else:
 
 	}
 
-
+"""
 
 
 #import dj_database_url
