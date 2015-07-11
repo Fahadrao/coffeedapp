@@ -15,11 +15,8 @@ https://docs.djangoproject.com/en/1.8/ref/settings/
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
 
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))
-MAIN_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
-
-
+BASE_DIR = os.path.dirname(os.path.dirname(__file__))
+MAIN_DIR = os.path.dirname(os.path.abspath(__file__))
 
 
 # Quick-start development settings - unsuitable for production
@@ -33,6 +30,15 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+TEMPLATE_CONTEXT_PROCESSORS = ("django.contrib.auth.context_processors.auth",
+"django.core.context_processors.debug",
+"django.core.context_processors.i18n",
+"django.core.context_processors.media",
+"django.core.context_processors.static",
+"django.core.context_processors.tz",
+"django.contrib.messages.context_processors.messages",
+"django.core.context_processors.request"
+)
 
 # Application definition
 
@@ -172,13 +178,10 @@ STATIC_URL = '/static/'
 TEMPLATES_DIRS = (
 	os.path.join(MAIN_DIR, 'templates'),
 	)
-
 STATICFILES_DIRS = (
-
 os.path.join(MAIN_DIR, 'static'),
 
 )
-
 
 DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
 AWS_S3_FORCE_HTTP_URL = True
