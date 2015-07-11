@@ -18,7 +18,7 @@ import os
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))
 MAIN_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-ON_HEROKU = os.environ.get('ON_HEROKU')
+
 
 
 
