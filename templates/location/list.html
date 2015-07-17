@@ -6,14 +6,18 @@
     {% for location in object_list %}
         <div class=''>
         <h3><a href="{{ location.get_absolute_url }}">{{ location.title }}</a></h3>
+        <div class="col-md-4 text-right">
+            <h3>{% include 'base/rating.html' with rating=location.get_average_rating %}</h3>
+        </div>
         <p>{{ location.description }}</p>
         {% if location.address %}<p><b>Location: </b>{{ location.address }}</p>{% endif %}
         {% if location.hours %}<p>{{ location.hours }}</p>{% endif %}
         {% if location.image_file %}<img class="img-responsive" src="{{ location.image_file.url }}"></img>{% endif %}
         </div>
     {% endfor %}
+    <h3>coffeedapp/templates/location/detail</h3>
     </div>
     <div class="col-md-2"></div>
 </div>
 {% endblock %}
- 
+

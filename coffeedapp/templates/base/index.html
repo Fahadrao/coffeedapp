@@ -19,6 +19,7 @@
     <link href="{%static "css/agency.css" %}" rel="stylesheet">
 
     <!-- Custom Fonts -->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
     <link href="{%static "font-awesome/css/font-awesome.min.css" %}" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
     <link href='https://fonts.googleapis.com/css?family=Kaushan+Script' rel='stylesheet' type='text/css'>
@@ -68,6 +69,8 @@
                     </li>
                     {% endblock %}
                 </ul>
+                {% block search %}
+                {% endblock %}
             </div>
             <!-- /.navbar-collapse -->
         </div>
@@ -206,6 +209,9 @@
 
     <footer>
         <div class="container">
+            {% block pagination %}
+            
+            {% endblock %}
             <div class="row">
                 <div class="col-md-4">
                     <span class="copyright">Copyright &copy; Your Website 2014</span>
@@ -231,7 +237,10 @@
     </footer>
 
     <!-- jQuery -->
-    <script src="js/jquery.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
+    <script src="http://maps.google.com/maps/api/js?sensor=true"></script> 
+    <script src="{% static "js/gmaps.js" %}"></script> 
+    <script src="{% static "js/maps.js" %}"></script>
 
     <!-- Bootstrap Core JavaScript -->
     <script src="js/bootstrap.min.js"></script>

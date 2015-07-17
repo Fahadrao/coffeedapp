@@ -49,7 +49,13 @@ INSTALLED_APPS = (
 	'django.contrib.sessions',
 	'django.contrib.messages',
 	'django.contrib.staticfiles',
+	'widget_tweaks',
 	'core',
+	'sitegate',
+	'bootstrap3',
+	'geoposition',
+	'bootstrap_pagination',
+
 )
 
 MIDDLEWARE_CLASSES = (
